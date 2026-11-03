@@ -50,6 +50,16 @@ test('a save reaches farm.json and stamps the date', async () => {
   assert.ok(onDisk.lastUpdated);
 });
 
+test('a field card and its lists are saved as sent', async () => {
+  const farm = await (await fetch(base + '/api/farm')).json();
+  const field = {
+    name: 'Field 7', crop: 'Wheat', growth: 'Growing', plow: false, lime: true, weed: false, fertilize: true, notes: 'Sloped',
+    todos: [{ text: 'Spray', priority: 'urgent', done: false }], plans: [{ text: 'Try canola' }], updatedAt: '2026-11-03T00:00:00.000Z',
+  };
+  assert.strictEqual((await send('/api/farm', 'PUT', { ...farm, fields: [field] })).status, 200);
+  assert.deepStrictEqual(JSON.parse(fs.readFileSync(dataFile, 'utf8')).fields, [field]);
+});
+
 test('bad data is rejected and changes nothing', async () => {
   const before = fs.readFileSync(dataFile, 'utf8');
   for (const body of [{ mapName: 'No lists' }, { mapName: '  ', fields: [], animals: [], todos: [], plans: [], notes: [] }, [], 'not json']) {

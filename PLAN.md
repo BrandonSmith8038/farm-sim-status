@@ -29,10 +29,11 @@ I update everything; when I come back weeks or months later it reminds me where 
 - Name / field number
 - Crop type (dropdown of FS25 crops)
 - Growth state (dropdown)
-- Needs plowing, needs lime, needs weeding (toggles)
-- Nitrogen / fertilizer level (stage selector)
-- "How it works" notes box
+- Needs plowing, lime, weeding, fertilizer (toggles)
+- Notes box
 - To-dos (checklist with priority) and future plans
+- Badges, one line per colour: red for a withered crop and for each unticked urgent to-do,
+  shown by name side by side; amber for ready to harvest or any need; green if neither applies.
 
 ## Animal card
 - Animal type and location
@@ -42,7 +43,7 @@ I update everything; when I come back weeks or months later it reminds me where 
 - To-dos (checklist with priority) and future plans
 
 ## To-Do & Plans tab
-- General to-dos: checklist items with priority (urgent / normal / someday).
+- General to-dos: checklist items with priority (urgent / normal).
 - Future plans: a list of ideas.
 - Separate from field and animal items.
 

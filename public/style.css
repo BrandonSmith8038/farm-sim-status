@@ -1,11 +1,14 @@
 :root {
   --bg: #15191a;
   --surface: #1f2526;
+  --surface-hover: #2a3233;
   --border: #364042;
   --text: #e8ecea;
   --muted: #9aa5a2;
   --accent: #8cc152;
+  --warn: #e8b339;
   --error: #f0705a;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -84,4 +87,136 @@ body {
 /* Panels */
 .panel { padding: 24px 32px; }
 .panel[hidden] { display: none; }
+.panel-bar { margin-bottom: 20px; }
 .empty { color: var(--muted); }
+
+.button {
+  padding: 6px 14px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.button:hover:enabled { border-color: var(--accent); }
+.button:disabled { opacity: 0.5; cursor: default; }
+
+/* Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.card input[type="text"], .card select, .card textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 6px 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+}
+.card input[type="text"]:focus, .card select:focus, .card textarea:focus { border-color: var(--accent); outline: none; }
+.card textarea { display: block; resize: vertical; field-sizing: content; min-height: 6.4em; }
+
+.card input.card-name {
+  padding: 2px 6px;
+  margin-left: -7px;
+  background: transparent;
+  border-color: transparent;
+  font-size: 20px;
+  font-weight: 600;
+}
+.card input.card-name:hover { border-color: var(--border); }
+
+.card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.card-group { display: flex; flex-direction: column; gap: 6px; }
+.card-label { display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: 13px; }
+
+.card-footer { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 13px; }
+.card-delete {
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.card-delete:hover { color: var(--error); }
+
+/* Colour-coded badges: each row wraps if it runs out of width */
+.badges { display: flex; flex-direction: column; gap: 4px; }
+.badge-row { display: flex; flex-wrap: wrap; gap: 4px; }
+.badge {
+  overflow-wrap: anywhere;
+  padding: 3px 10px;
+  border-radius: 4px;
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 600;
+}
+.badge-good { background: var(--accent); }
+.badge-warn { background: var(--warn); }
+.badge-urgent { background: var(--error); }
+
+/* Toggles */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 4px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.chip:hover { color: var(--text); }
+.chip[aria-pressed="true"] { background: var(--warn); border-color: var(--warn); color: var(--bg); font-weight: 600; }
+
+/* To-do and plan lists */
+.list { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.list:empty { display: none; }
+.list-row { display: flex; align-items: center; gap: 8px; padding-left: 8px; border-left: 3px solid transparent; }
+.list-row input[type="checkbox"] { flex-shrink: 0; width: 16px; height: 16px; margin: 0; accent-color: var(--accent); }
+.list-row.priority-urgent { border-left-color: var(--error); }
+.list-row.priority-normal { border-left-color: var(--accent); }
+.list-row.done { border-left-color: transparent; }
+.list-row.done input[type="text"] { color: var(--muted); text-decoration: line-through; }
+
+.card select.priority { flex: 0 0 92px; width: 92px; }
+
+.list-remove {
+  flex-shrink: 0;
+  padding: 0 4px;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.list-remove:hover { color: var(--error); }
+
+.add-form { display: flex; gap: 8px; }
+.add-form .button { flex-shrink: 0; }

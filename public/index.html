@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>Farm Sim Status</title>
   <link rel="stylesheet" href="style.css">
+  <script src="fields.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -31,7 +32,11 @@
   </nav>
 
   <main>
-    <section class="panel" role="tabpanel" data-panel="fields"><p class="empty">Field cards will go here.</p></section>
+    <section class="panel" role="tabpanel" data-panel="fields">
+      <div class="panel-bar"><button id="add-field" class="button" type="button" disabled>Add field</button></div>
+      <p id="fields-empty" class="empty" hidden>No fields yet. Use Add field to create your first card.</p>
+      <div id="field-grid" class="card-grid"></div>
+    </section>
     <section class="panel" role="tabpanel" data-panel="animals"><p class="empty">Animal cards will go here.</p></section>
     <section class="panel" role="tabpanel" data-panel="todos"><p class="empty">To-dos and future plans will go here.</p></section>
     <section class="panel" role="tabpanel" data-panel="notes"><p class="empty">Notes and guides will go here.</p></section>
