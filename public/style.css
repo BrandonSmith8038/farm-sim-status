@@ -1,0 +1,87 @@
+:root {
+  --bg: #15191a;
+  --surface: #1f2526;
+  --border: #364042;
+  --text: #e8ecea;
+  --muted: #9aa5a2;
+  --accent: #8cc152;
+  --error: #f0705a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 "Segoe UI", system-ui, sans-serif;
+}
+
+/* Header */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px 32px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.title { display: flex; align-items: baseline; gap: 20px; min-width: 0; }
+.app-name { color: var(--muted); font-size: 14px; white-space: nowrap; }
+
+.map-view { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.map-view[hidden] { display: none; }
+
+.map-text, .map-input { font: inherit; font-size: 26px; font-weight: 600; }
+.map-text { padding: 3px 0; border: 1px solid transparent; }
+
+.map-edit {
+  display: flex;
+  padding: 6px;
+  background: none;
+  border: 0;
+  border-radius: 4px;
+  color: var(--muted);
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+.map-edit[hidden] { display: none; }
+.map-view:hover .map-edit, .map-edit:focus-visible { opacity: 1; }
+.map-edit:hover { color: var(--accent); }
+
+.map-input {
+  width: 24em;
+  min-width: 0;
+  padding: 3px 8px;
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--text);
+  outline: none;
+}
+
+.status { flex-shrink: 0; color: var(--muted); font-size: 14px; }
+.status.error { color: var(--error); }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; padding: 0 32px; border-bottom: 1px solid var(--border); }
+
+.tab {
+  padding: 12px 22px;
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+.tab:hover { color: var(--text); }
+.tab[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); font-weight: 600; }
+
+/* Panels */
+.panel { padding: 24px 32px; }
+.panel[hidden] { display: none; }
+.empty { color: var(--muted); }

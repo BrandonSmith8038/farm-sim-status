@@ -1,0 +1,10 @@
+{
+  "name": "farm-sim-status",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LAN status board and reminder notebook for Farming Simulator 25",
+  "main": "server.js",
+  "scripts": { "start": "node server.js", "test": "node --test" },
+  "engines": { "node": ">=20" },
+  "dependencies": { "express": "^4.19.2" }
+}

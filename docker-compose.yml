@@ -1,0 +1,9 @@
+services:
+  farm-sim-status:
+    build: .
+    container_name: farm-sim-status
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8210}:8210"   # set PORT in .env (not committed)
+    volumes:
+      - /mnt/user/appdata/farm-sim-status:/data
