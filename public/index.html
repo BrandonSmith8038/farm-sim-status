@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="style.css">
   <script src="fields.js" defer></script>
   <script src="animals.js" defer></script>
+  <script src="todos.js" defer></script>
+  <script src="notes.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -31,8 +33,11 @@
           </svg>
         </button>
         <div id="add-list" class="add-list" hidden>
-          <button class="add-item" type="button" data-tab="fields">Field</button>
-          <button class="add-item" type="button" data-tab="animals">Animals</button>
+          <button class="add-item" type="button" data-tab="fields" data-add="field">Field</button>
+          <button class="add-item" type="button" data-tab="animals" data-add="animals">Animals</button>
+          <button class="add-item" type="button" data-tab="todos" data-add="todo">To-do</button>
+          <button class="add-item" type="button" data-tab="todos" data-add="plan">Future plan</button>
+          <button class="add-item" type="button" data-tab="notes" data-add="note">Note</button>
         </div>
       </div>
     </div>
@@ -42,7 +47,7 @@
     <button class="tab" type="button" role="tab" data-tab="fields">Fields</button>
     <button class="tab" type="button" role="tab" data-tab="animals">Animals</button>
     <button class="tab" type="button" role="tab" data-tab="todos">To-Do &amp; Plans</button>
-    <button class="tab" type="button" role="tab" data-tab="notes">Notes/Guides</button>
+    <button class="tab" type="button" role="tab" data-tab="notes">Notes</button>
   </nav>
 
   <main>
@@ -54,8 +59,10 @@
       <p id="animals-empty" class="empty" hidden>No animals yet. Use the + button at the top to add your first card.</p>
       <div id="animal-grid" class="card-grid"></div>
     </section>
-    <section class="panel" role="tabpanel" data-panel="todos"><p class="empty">To-dos and future plans will go here.</p></section>
-    <section class="panel" role="tabpanel" data-panel="notes"><p class="empty">Notes and guides will go here.</p></section>
+    <section class="panel" role="tabpanel" data-panel="todos">
+      <div id="todo-columns" class="todo-columns"></div>
+    </section>
+    <section id="notes-panel" class="panel" role="tabpanel" data-panel="notes"></section>
   </main>
 </body>
 </html>

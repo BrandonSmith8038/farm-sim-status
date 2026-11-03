@@ -21,9 +21,11 @@ I update everything; when I come back weeks or months later it reminds me where 
 ## Layout
 - **Add menu:** one + button on the right of the header. It opens a list of what can be added;
   picking one switches to that tab and adds the new entry.
+  Fields and Animals add a blank card; To-do, Future plan and Note put the cursor in that list's
+  Add box.
 - **Welcome back panel** at the top: the date of the last update, all unticked to-dos
-  across the farm (urgent first), and everything flagged "needs attention".
-- **Tabs** below it: Fields, Animals, To-Do & Plans, Notes/Guides.
+  across the farm (urgent first), everything flagged "needs attention", and the notes.
+- **Tabs** below it: Fields, Animals, To-Do & Plans, Notes.
 - Fields and Animals tabs are **card grids**. Each card has a colour-coded
   "needs attention" badge.
 
@@ -52,15 +54,18 @@ I update everything; when I come back weeks or months later it reminds me where 
 - Future plans: a list of ideas.
 - Separate from field and animal items.
 
-## Notes/Guides tab
-- Titled reference notes on how game systems work (silage, production chains, etc.).
+## Notes tab
+- Short reminders to myself, such as "left a grain trailer at the silo". Not guides on how the
+  game works.
+- Each note is one line with its last edited date, plus an optional longer explanation.
+- Newest first. Removing a note only asks first if it has details.
 
 ## Build order (each step tested on Unraid before the next)
 1. Backend and JSON storage, Docker files, page shell (header with editable map name,
    tabs).
 2. Fields tab.
 3. Animals tab.
-4. To-Do & Plans tab and Notes/Guides tab.
+4. To-Do & Plans tab and Notes tab.
 5. Welcome back summary.
 
 ## Later ideas

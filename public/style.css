@@ -209,7 +209,7 @@ body {
 .card select.card-type:focus { border-color: var(--accent); }
 .card-type option { background: var(--bg); font-size: 14px; font-weight: 400; }
 
-.card textarea.food-needs { min-height: 3.6em; }
+.card textarea.food-needs, .card textarea.note-details { min-height: 3.6em; }
 
 .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .card-group { display: flex; flex-direction: column; gap: 6px; }
@@ -287,3 +287,29 @@ body {
 
 .add-form { display: flex; gap: 8px; }
 .add-form .button { flex-shrink: 0; }
+
+/* To-Do & Plans tab */
+.todo-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+
+/* Notes tab */
+.note-card { max-width: 960px; }
+.note-list { gap: 10px; }
+.note { display: flex; flex-direction: column; gap: 6px; }
+.note-row { display: flex; align-items: center; gap: 8px; }
+.note-details[hidden] { display: none; }
+.note-date { flex: 0 0 90px; color: var(--muted); font-size: 13px; text-align: right; white-space: nowrap; }
+
+.note-more {
+  flex-shrink: 0;
+  padding: 0 4px;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.note-more:hover { color: var(--accent); }
+/* Keeps its space when hidden, so the dates stay lined up from row to row. */
+.note-more[hidden] { display: block; visibility: hidden; }

@@ -188,7 +188,7 @@ for (const tab of tabs) tab.addEventListener('click', () => { location.hash = ta
 window.addEventListener('hashchange', () => showTab(location.hash.slice(1)));
 
 // ---------- Add menu ----------
-const ADDERS = { fields: addField, animals: addAnimal };
+const ADDERS = { field: addField, animals: addAnimal, todo: focusNewTodo, plan: focusNewPlan, note: focusNewNote };
 
 function setAddMenuOpen(open) {
   addList.hidden = !open;
@@ -199,12 +199,12 @@ addButton.addEventListener('click', () => setAddMenuOpen(addList.hidden));
 
 for (const item of addList.querySelectorAll('.add-item')) {
   item.addEventListener('click', () => {
-    const tab = item.dataset.tab;
+    const { tab, add } = item.dataset;
     setAddMenuOpen(false);
-    // Show the tab first: a new card's name box can't take the cursor while its tab is hidden.
+    // Show the tab first: a text box can't take the cursor while its tab is hidden.
     location.hash = tab;
     showTab(tab);
-    ADDERS[tab]();
+    ADDERS[add]();
   });
 }
 
@@ -257,6 +257,8 @@ api('/api/farm')
     renderMapName();
     renderFields();
     renderAnimals();
+    renderTodos();
+    renderNotes();
     addButton.disabled = false;
   })
   .catch(e => showStatus(`Could not load the farm: ${e.message}`, true));
