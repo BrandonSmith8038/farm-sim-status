@@ -6,22 +6,27 @@ and when you come back weeks or months later it reminds you where you left off.
 It runs in Docker on the home server, is LAN only with no login, and is laid out for a 1440p desktop
 monitor.
 
+![The Fields tab, with the Welcome back corkboard above it](docs/screenshot.jpg)
+
 ## What's on the page
+The page looks like a farm desk: wooden planks, a barn-red sign for the header, and handwriting on
+notebook paper.
+
 - **Header:** the map name (hover over it to edit) and a **+** button for adding anything. Pick an
   item and it opens that tab, then adds a blank card or puts the cursor in that list's Add box.
-- **Welcome back panel:** the date of the last update, then three columns: open to-dos (urgent first),
-  everything that needs attention, and notes. It's read-only, so click an item to jump to where it's
-  edited. Hide collapses it, and it reopens every time the page loads.
+- **Welcome back corkboard:** the date of the last update, then three pinned sheets: open to-dos
+  (urgent first), everything that needs attention, and notes. It's read-only, so click an item to jump
+  to where it's edited. Hide collapses it, and it reopens every time the page loads.
 - **Fields tab:** a card per field with its crop, growth state, needs (plowing, lime, weeding,
   fertilizer), notes, to-dos and future plans.
 - **Animals tab:** a card per group of animals with its type, location, food status, notes, to-dos and
   future plans. When food is "Not good", a "What they need" box appears.
 - **To-Do & Plans tab:** general to-dos and future plans that don't belong to a card.
-- **Notes tab:** short reminders to yourself, such as "left a grain trailer at the silo", each with
-  an optional longer explanation.
+- **Notes tab:** short reminders to yourself on post-its, such as "left a grain trailer at the silo",
+  each with an optional longer explanation.
 
-Field and animal cards have colour-coded badges: red for urgent, amber for needs attention, green for
-all good. Everything saves by itself shortly after you stop typing.
+Field and animal cards have colour-coded highlighter badges: red for urgent, amber for needs attention,
+green for all good. Everything saves by itself shortly after you stop typing.
 
 **Good to know:** keep the page open in only one browser tab. Each save replaces the whole farm, so an
 out-of-date second tab would overwrite newer edits.
@@ -78,8 +83,10 @@ npm ci
 npm test
 ```
 
-## What's next
-- Styling pass.
-- Add a screenshot to this README once styling is done.
+## Credits
+The handwriting fonts are [Indie Flower](https://fonts.google.com/specimen/Indie+Flower) and
+[Patrick Hand](https://fonts.google.com/specimen/Patrick+Hand), both under the SIL Open Font License.
+They and their licenses are in [public/fonts/](public/fonts/).
 
+## What's next
 Later ideas: more sections, animal-specific food needs, ntfy reminders, a Stream Deck button.

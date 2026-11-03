@@ -12,6 +12,9 @@ does and how to install, update and back it up.
   - `app.js`: saving, shared building blocks, tabs, add menu, map name, startup.
   - `fields.js`, `animals.js`, `todos.js`, `notes.js`: one tab each.
   - `welcome.js`: Welcome back panel.
+  - `style.css`: all styling. `wood.svg` and `cork.svg` are generated textures, not photos, and `fonts/`
+    holds the self-hosted fonts.
+- `docs/screenshot.jpg`: README screenshot, taken with sample data, not the real farm.
 - `test/smoke.test.js`: API and storage tests. Nothing tests the frontend behaviour.
 
 ## Data flow
@@ -48,6 +51,20 @@ does and how to install, update and back it up.
   flags there.
 - Add a smoke test when the saved data or API changes.
 
+## Styling rules
+The look is a farm desk: wood background, barn-red header sign, lined notebook cards with holes, stacked
+paper tabs, post-it notes and a corkboard Welcome back panel.
+- **Stay on the ruled lines.** Every row on a card must be a whole number of `--line` (30px) tall, or the
+  writing drifts off the rules. A bigger heading takes two lines, like `.todo-columns .card-label`.
+- **Sheets behind paper use `z-index: -1`.** The parent (`body`, `.panel`, `.card-grid`) needs
+  `isolation: isolate` so they stay above its background, but never put it on the card itself.
+- **Anything at `z-index: -1` can sit behind its own parent, which then takes its clicks.** Inactive tabs
+  have this problem, so `.tabs` has `pointer-events: none` and `.tab` has `pointer-events: auto`.
+- **Fonts:** Indie Flower for text, Patrick Hand for digits only, because Indie Flower's 1 can read like
+  a 4. Fonts are self-hosted, so the page needs nothing from the internet.
+- **Button styles come late in `style.css`.** `.note-more` clears its background, so overriding it from
+  earlier in the file needs a more specific selector, like `.welcome-head .welcome-toggle`.
+
 ## Product rules
 **Overall**
 - 1440p desktop only. No mobile layout.
@@ -78,7 +95,7 @@ does and how to install, update and back it up.
 - To-dos have a priority (urgent or normal). Unticked items come first, most urgent at the top.
 - General to-dos and plans are separate from field and animal items.
 - Notes are short personal reminders, not guides on how the game works. Newest first, and each shows
-  its last edited date.
+  its last edited date. A long title wraps on the post-it, and Enter doesn't add a line to it.
 - Deleting a note only asks first if it has details. A note with details always shows them.
 - The animal "What they need" box only hides, so its text returns if food goes back to not good.
   Specifics per animal type are still to be supplied.
@@ -90,3 +107,6 @@ so copy the project to a local folder and run `npm ci` there first.
 ## Viewing the page
 Use the same local copy, then take 2560x1440 screenshots with playwright-core using `channel: 'chrome'`.
 Edge isn't at the path Playwright expects.
+
+Test clicks with real mouse events, not `.click()` from code. `.click()` skips whatever is covering the
+element, so it passes even when a person couldn't click it.

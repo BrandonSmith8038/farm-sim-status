@@ -11,8 +11,10 @@ function noteRow(note, onRemove) {
     scheduleSave();
   }
 
-  const text = el('input', { type: 'text', value: note.text, ariaLabel: 'Note' });
+  // A textarea so a long title wraps on the post-it. Enter does nothing, so it stays one line of text.
+  const text = el('textarea', { className: 'note-title', rows: 1, value: note.text, ariaLabel: 'Note' });
   text.addEventListener('input', () => { note.text = text.value; changed(); });
+  text.addEventListener('keydown', e => { if (e.key === 'Enter') e.preventDefault(); });
 
   // A note with details always shows them, so nothing is hidden when you come back.
   const details = el('textarea', { className: 'note-details', rows: 2, value: note.details, ariaLabel: 'Details', hidden: !note.details });
