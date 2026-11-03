@@ -66,8 +66,55 @@ body {
   outline: none;
 }
 
-.status { flex-shrink: 0; color: var(--muted); font-size: 14px; }
+.top-actions { display: flex; flex-shrink: 0; align-items: center; gap: 16px; }
+
+.status { color: var(--muted); font-size: 14px; }
 .status.error { color: var(--error); }
+
+/* Add menu */
+.add-menu { position: relative; }
+
+.add-button {
+  display: flex;
+  padding: 6px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.add-button:hover:enabled, .add-button[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
+.add-button:disabled { opacity: 0.5; cursor: default; }
+
+.add-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+.add-list[hidden] { display: none; }
+
+.add-item {
+  padding: 8px 12px;
+  background: none;
+  border: 0;
+  border-radius: 4px;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+.add-item:hover, .add-item:focus-visible { background: var(--surface-hover); outline: none; }
 
 /* Tabs */
 .tabs { display: flex; gap: 4px; padding: 0 32px; border-bottom: 1px solid var(--border); }
@@ -87,7 +134,6 @@ body {
 /* Panels */
 .panel { padding: 24px 32px; }
 .panel[hidden] { display: none; }
-.panel-bar { margin-bottom: 20px; }
 .empty { color: var(--muted); }
 
 .button {
@@ -146,9 +192,29 @@ body {
 }
 .card input.card-name:hover { border-color: var(--border); }
 
+/* Animal card title: type dropdown, then the location in the rest of the row */
+.card-head { display: flex; align-items: center; gap: 8px; }
+.card-head input.card-name { flex: 1; margin-left: 0; }
+.card select.card-type {
+  flex: 0 0 170px;
+  width: 170px;
+  padding: 2px 6px;
+  margin-left: -7px;
+  background: transparent;
+  border-color: transparent;
+  font-size: 20px;
+  font-weight: 600;
+}
+.card select.card-type:hover { border-color: var(--border); }
+.card select.card-type:focus { border-color: var(--accent); }
+.card-type option { background: var(--bg); font-size: 14px; font-weight: 400; }
+
+.card textarea.food-needs { min-height: 3.6em; }
+
 .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .card-group { display: flex; flex-direction: column; gap: 6px; }
 .card-label { display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: 13px; }
+.card-label[hidden] { display: none; }
 
 .card-footer { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 13px; }
 .card-delete {
@@ -192,6 +258,7 @@ body {
 }
 .chip:hover { color: var(--text); }
 .chip[aria-pressed="true"] { background: var(--warn); border-color: var(--warn); color: var(--bg); font-weight: 600; }
+.chip-good[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
 
 /* To-do and plan lists */
 .list { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }

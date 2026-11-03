@@ -5,6 +5,9 @@ const mapInput = document.getElementById('map-input');
 const statusText = document.getElementById('status');
 const tabs = [...document.querySelectorAll('.tab')];
 const panels = [...document.querySelectorAll('.panel')];
+const addMenu = document.getElementById('add-menu');
+const addButton = document.getElementById('add-button');
+const addList = document.getElementById('add-list');
 
 const SAVE_DELAY = 500;
 const PRIORITIES = [['urgent', 'Urgent'], ['normal', 'Normal']];
@@ -71,6 +74,18 @@ function el(tag, props = {}, ...children) {
 }
 
 const formatDate = iso => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+
+// Draws a card's badges from rows of { level, text }.
+const badgeRows = rows => rows.map(row => el('div', { className: 'badge-row' },
+  ...row.map(({ level, text }) => el('span', { className: `badge badge-${level}`, textContent: text }))));
+
+// A dropdown that edits one value on a card.
+function dropdown(owner, key, options, onChange, props = {}) {
+  const select = el('select', props, ...options.map(option => el('option', { value: option, textContent: option })));
+  select.value = owner[key];
+  select.addEventListener('change', () => { owner[key] = select.value; onChange(); });
+  return select;
+}
 
 function prioritySelect(value) {
   const select = el('select', { className: 'priority', ariaLabel: 'Priority' },
@@ -172,6 +187,37 @@ function showTab(name) {
 for (const tab of tabs) tab.addEventListener('click', () => { location.hash = tab.dataset.tab; });
 window.addEventListener('hashchange', () => showTab(location.hash.slice(1)));
 
+// ---------- Add menu ----------
+const ADDERS = { fields: addField, animals: addAnimal };
+
+function setAddMenuOpen(open) {
+  addList.hidden = !open;
+  addButton.setAttribute('aria-expanded', String(open));
+}
+
+addButton.addEventListener('click', () => setAddMenuOpen(addList.hidden));
+
+for (const item of addList.querySelectorAll('.add-item')) {
+  item.addEventListener('click', () => {
+    const tab = item.dataset.tab;
+    setAddMenuOpen(false);
+    // Show the tab first: a new card's name box can't take the cursor while its tab is hidden.
+    location.hash = tab;
+    showTab(tab);
+    ADDERS[tab]();
+  });
+}
+
+// Clicking anywhere else or pressing Escape closes the menu.
+document.addEventListener('click', e => {
+  if (!addMenu.contains(e.target)) setAddMenuOpen(false);
+});
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape' || addList.hidden) return;
+  setAddMenuOpen(false);
+  addButton.focus();
+});
+
 // ---------- Map name ----------
 function setMapEditing(editing) {
   mapView.hidden = editing;
@@ -210,6 +256,7 @@ api('/api/farm')
     farm.fields.forEach(upgradeField);
     renderMapName();
     renderFields();
-    addFieldButton.disabled = false;
+    renderAnimals();
+    addButton.disabled = false;
   })
   .catch(e => showStatus(`Could not load the farm: ${e.message}`, true));

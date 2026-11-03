@@ -19,6 +19,8 @@ I update everything; when I come back weeks or months later it reminds me where 
 - **Extras:** no ntfy or Stream Deck button in v1.
 
 ## Layout
+- **Add menu:** one + button on the right of the header. It opens a list of what can be added;
+  picking one switches to that tab and adds the new entry.
 - **Welcome back panel** at the top: the date of the last update, all unticked to-dos
   across the farm (urgent first), and everything flagged "needs attention".
 - **Tabs** below it: Fields, Animals, To-Do & Plans, Notes/Guides.
@@ -41,6 +43,9 @@ I update everything; when I come back weeks or months later it reminds me where 
   (specifics per animal type to be supplied later)
 - Notes box
 - To-dos (checklist with priority) and future plans
+- Badges, one line per colour: red for each unticked urgent to-do, shown by name side by side;
+  amber for food not good, showing what they need; green if neither applies.
+- Cards sort by animal type, then location.
 
 ## To-Do & Plans tab
 - General to-dos: checklist items with priority (urgent / normal).

@@ -60,6 +60,16 @@ test('a field card and its lists are saved as sent', async () => {
   assert.deepStrictEqual(JSON.parse(fs.readFileSync(dataFile, 'utf8')).fields, [field]);
 });
 
+test('an animal card and its lists are saved as sent', async () => {
+  const farm = await (await fetch(base + '/api/farm')).json();
+  const animal = {
+    type: 'Cows', location: 'Barn by Field 3', food: 'bad', foodNeeds: 'hay and water', notes: 'Holsteins',
+    todos: [{ text: 'Fix the gate', priority: 'urgent', done: false }], plans: [{ text: 'Second barn' }], updatedAt: '2026-11-03T00:00:00.000Z',
+  };
+  assert.strictEqual((await send('/api/farm', 'PUT', { ...farm, animals: [animal] })).status, 200);
+  assert.deepStrictEqual(JSON.parse(fs.readFileSync(dataFile, 'utf8')).animals, [animal]);
+});
+
 test('bad data is rejected and changes nothing', async () => {
   const before = fs.readFileSync(dataFile, 'utf8');
   for (const body of [{ mapName: 'No lists' }, { mapName: '  ', fields: [], animals: [], todos: [], plans: [], notes: [] }, [], 'not json']) {

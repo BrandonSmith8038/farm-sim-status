@@ -9,7 +9,6 @@ const FIELD_NEEDS = [['plow', 'Plowing'], ['lime', 'Lime'], ['weed', 'Weeding'],
 
 const fieldGrid = document.getElementById('field-grid');
 const fieldsEmpty = document.getElementById('fields-empty');
-const addFieldButton = document.getElementById('add-field');
 
 const newField = () => ({
   name: '', crop: CROPS[0], growth: GROWTH_STATES[0], plow: false, lime: false, weed: false, fertilize: false,
@@ -54,8 +53,7 @@ function fieldCard(field) {
   const updated = el('span', { className: 'card-date' });
 
   function refresh() {
-    badges.replaceChildren(...fieldAttention(field).map(row => el('div', { className: 'badge-row' },
-      ...row.map(({ level, text }) => el('span', { className: `badge badge-${level}`, textContent: text })))));
+    badges.replaceChildren(...badgeRows(fieldAttention(field)));
     updated.textContent = `Updated ${formatDate(field.updatedAt)}`;
   }
   // Every edit updates the badge and date in place rather than rebuilding the card,
@@ -69,12 +67,7 @@ function fieldCard(field) {
   const name = el('input', { className: 'card-name', type: 'text', value: field.name, placeholder: 'Field name or number', ariaLabel: 'Field name or number' });
   name.addEventListener('input', () => { field.name = name.value; changed(); });
 
-  const select = (label, key, options) => {
-    const input = el('select', {}, ...options.map(option => el('option', { value: option, textContent: option })));
-    input.value = field[key];
-    input.addEventListener('change', () => { field[key] = input.value; changed(); });
-    return el('label', { className: 'card-label' }, label, input);
-  };
+  const select = (label, key, options) => el('label', { className: 'card-label' }, label, dropdown(field, key, options, changed));
 
   const needs = FIELD_NEEDS.map(([key, label]) => {
     const button = el('button', { className: 'chip', type: 'button', textContent: label, ariaPressed: String(field[key]) });
@@ -123,9 +116,9 @@ function renderFields(focusField) {
   fieldsEmpty.hidden = farm.fields.length > 0;
 }
 
-addFieldButton.addEventListener('click', () => {
+function addField() {
   const field = newField();
   farm.fields.push(field);
   renderFields(field);
   scheduleSave();
-});
+}

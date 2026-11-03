@@ -5,6 +5,7 @@
   <title>Farm Sim Status</title>
   <link rel="stylesheet" href="style.css">
   <script src="fields.js" defer></script>
+  <script src="animals.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -21,7 +22,20 @@
       </div>
       <input id="map-input" class="map-input" type="text" maxlength="60" aria-label="Map name" hidden>
     </div>
-    <span id="status" class="status" role="status"></span>
+    <div class="top-actions">
+      <span id="status" class="status" role="status"></span>
+      <div id="add-menu" class="add-menu">
+        <button id="add-button" class="add-button" type="button" aria-label="Add new" title="Add new" aria-expanded="false" aria-controls="add-list" disabled>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/>
+          </svg>
+        </button>
+        <div id="add-list" class="add-list" hidden>
+          <button class="add-item" type="button" data-tab="fields">Field</button>
+          <button class="add-item" type="button" data-tab="animals">Animals</button>
+        </div>
+      </div>
+    </div>
   </header>
 
   <nav class="tabs" role="tablist">
@@ -33,11 +47,13 @@
 
   <main>
     <section class="panel" role="tabpanel" data-panel="fields">
-      <div class="panel-bar"><button id="add-field" class="button" type="button" disabled>Add field</button></div>
-      <p id="fields-empty" class="empty" hidden>No fields yet. Use Add field to create your first card.</p>
+      <p id="fields-empty" class="empty" hidden>No fields yet. Use the + button at the top to add your first card.</p>
       <div id="field-grid" class="card-grid"></div>
     </section>
-    <section class="panel" role="tabpanel" data-panel="animals"><p class="empty">Animal cards will go here.</p></section>
+    <section class="panel" role="tabpanel" data-panel="animals">
+      <p id="animals-empty" class="empty" hidden>No animals yet. Use the + button at the top to add your first card.</p>
+      <div id="animal-grid" class="card-grid"></div>
+    </section>
     <section class="panel" role="tabpanel" data-panel="todos"><p class="empty">To-dos and future plans will go here.</p></section>
     <section class="panel" role="tabpanel" data-panel="notes"><p class="empty">Notes and guides will go here.</p></section>
   </main>
