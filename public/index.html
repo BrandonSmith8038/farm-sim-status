@@ -8,6 +8,7 @@
   <script src="animals.js" defer></script>
   <script src="todos.js" defer></script>
   <script src="notes.js" defer></script>
+  <script src="welcome.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -42,6 +43,28 @@
       </div>
     </div>
   </header>
+
+  <section id="welcome" class="welcome" aria-labelledby="welcome-title" hidden>
+    <div class="welcome-head">
+      <h2 id="welcome-title" class="welcome-title">Welcome back</h2>
+      <span id="welcome-date" class="welcome-date"></span>
+      <button id="welcome-toggle" class="note-more welcome-toggle" type="button" aria-expanded="true" aria-controls="welcome-columns">Hide</button>
+    </div>
+    <div id="welcome-columns" class="welcome-columns">
+      <div>
+        <h3 class="welcome-heading">To-dos</h3>
+        <ul id="welcome-todos" class="list welcome-list"></ul>
+      </div>
+      <div>
+        <h3 class="welcome-heading">Needs attention</h3>
+        <ul id="welcome-attention" class="list welcome-list"></ul>
+      </div>
+      <div>
+        <h3 class="welcome-heading">Notes</h3>
+        <ul id="welcome-notes" class="list welcome-list"></ul>
+      </div>
+    </div>
+  </section>
 
   <nav class="tabs" role="tablist">
     <button class="tab" type="button" role="tab" data-tab="fields">Fields</button>

@@ -30,17 +30,26 @@ function upgradeField(field) {
   }
 }
 
+const fieldLabel = field => field.name.trim() || 'Unnamed field';
+
+// What needs attention because of the field itself, not its to-dos.
+function fieldFlags(field) {
+  const flags = [];
+  if (field.growth === 'Withered') flags.push({ level: 'urgent', text: 'Withered' });
+  if (field.growth === 'Ready to harvest') flags.push({ level: 'warn', text: 'Ready to harvest' });
+  const needs = FIELD_NEEDS.filter(([key]) => field[key]).map(([, label]) => label.toLowerCase());
+  if (needs.length) flags.push({ level: 'warn', text: `Needs ${needs.join(', ')}` });
+  return flags;
+}
+
 // Works out the card's badges as rows: red badges side by side (one per urgent to-do),
 // then one amber badge, or a green badge if neither applies.
 function fieldAttention(field) {
   const urgent = field.todos.filter(todo => todo.priority === 'urgent' && !todo.done);
-  const red = urgent.map(todo => todo.text.trim() || 'Urgent to-do');
-  if (field.growth === 'Withered') red.push('Withered');
-
-  const amber = [];
-  if (field.growth === 'Ready to harvest') amber.push('Ready to harvest');
-  const needs = FIELD_NEEDS.filter(([key]) => field[key]).map(([, label]) => label.toLowerCase());
-  if (needs.length) amber.push(`Needs ${needs.join(', ')}`);
+  const flags = fieldFlags(field);
+  const textsAt = level => flags.filter(flag => flag.level === level).map(flag => flag.text);
+  const red = [...urgent.map(todo => todo.text.trim() || 'Urgent to-do'), ...textsAt('urgent')];
+  const amber = textsAt('warn');
 
   const rows = [];
   if (red.length) rows.push(red.map(text => ({ level: 'urgent', text })));
@@ -105,11 +114,13 @@ function fieldCard(field) {
 
 // Cards sort by name, so "Field 2" comes before "Field 10". Renaming a card
 // only moves it the next time the page loads, so it can't jump mid-edit.
+const sortedFields = () => [...farm.fields].sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+
 function renderFields(focusField) {
-  const sorted = [...farm.fields].sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
   fieldGrid.replaceChildren();
-  for (const field of sorted) {
+  for (const field of sortedFields()) {
     const card = fieldCard(field);
+    cardElements.set(field, card);
     fieldGrid.append(card);
     if (field === focusField) card.querySelector('.card-name').focus();
   }

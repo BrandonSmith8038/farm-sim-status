@@ -25,6 +25,12 @@ I update everything; when I come back weeks or months later it reminds me where 
   Add box.
 - **Welcome back panel** at the top: the date of the last update, all unticked to-dos
   across the farm (urgent first), everything flagged "needs attention", and the notes.
+  - Three columns: To-dos, Needs attention, Notes. Each scrolls past about 320px.
+  - Read-only: clicking an item opens its tab, then scrolls to and highlights its card or note.
+  - Each item shows where it's from. Urgent to-dos appear only under To-dos, and future plans
+    stay out.
+  - Updates live as you edit, so the date changes to today after the first edit.
+  - Can be collapsed, but always reopens on page load so it can't be missed on coming back.
 - **Tabs** below it: Fields, Animals, To-Do & Plans, Notes.
 - Fields and Animals tabs are **card grids**. Each card has a colour-coded
   "needs attention" badge.
@@ -67,6 +73,9 @@ I update everything; when I come back weeks or months later it reminds me where 
 3. Animals tab.
 4. To-Do & Plans tab and Notes tab.
 5. Welcome back summary.
+
+## Next up
+- Styling pass, in its own session. All five build steps work and are confirmed.
 
 ## Later ideas
 - More sections, animal-specific food needs, ntfy reminders, Stream Deck button.

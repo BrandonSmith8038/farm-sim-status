@@ -34,6 +34,13 @@ test('serves the page shell', async () => {
   assert.match(await res.text(), /Farm Sim Status/);
 });
 
+test('serves the welcome back panel and its script', async () => {
+  const page = await (await fetch(base + '/')).text();
+  assert.match(page, /id="welcome"/);
+  assert.match(page, /src="welcome\.js"/);
+  assert.strictEqual((await fetch(base + '/welcome.js')).status, 200);
+});
+
 test('starts with the default farm', async () => {
   const farm = await (await fetch(base + '/api/farm')).json();
   assert.strictEqual(farm.mapName, 'Alma, Missouri');

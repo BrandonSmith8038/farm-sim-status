@@ -116,6 +116,49 @@ body {
 }
 .add-item:hover, .add-item:focus-visible { background: var(--surface-hover); outline: none; }
 
+/* Welcome back summary */
+.welcome { padding: 18px 32px; border-bottom: 1px solid var(--border); }
+.welcome-head { display: flex; align-items: baseline; gap: 14px; }
+.welcome-title { margin: 0; font-size: 18px; font-weight: 600; }
+.welcome-date { color: var(--muted); font-size: 14px; }
+.welcome-toggle { margin-left: auto; }
+
+.welcome-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 12px; }
+.welcome-columns[hidden] { display: none; }
+.welcome-heading { margin: 0 0 8px; color: var(--muted); font-size: 13px; font-weight: 400; }
+.welcome-list { max-height: 320px; overflow-y: auto; }
+
+.welcome-item {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  width: 100%;
+  min-width: 0;
+  padding: 3px 6px;
+  background: none;
+  border: 0;
+  border-radius: 4px;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.welcome-item:hover, .welcome-item:focus-visible { background: var(--surface-hover); outline: none; }
+.welcome-source { color: var(--muted); font-size: 13px; }
+.welcome-details { flex-basis: 100%; color: var(--muted); font-size: 13px; white-space: pre-wrap; }
+
+/* The brief highlight on whatever the summary jumped to */
+.flash { outline: 2px solid transparent; outline-offset: 3px; scroll-margin-top: 16px; animation: flash 1.8s ease-out; }
+@keyframes flash {
+  from, 50% { outline-color: var(--accent); }
+  to { outline-color: transparent; }
+}
+
 /* Tabs */
 .tabs { display: flex; gap: 4px; padding: 0 32px; border-bottom: 1px solid var(--border); }
 

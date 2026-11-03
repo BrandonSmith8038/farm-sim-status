@@ -10,18 +10,25 @@ const newAnimal = () => ({
   notes: '', todos: [], plans: [], updatedAt: new Date().toISOString(),
 });
 
+const animalLabel = animal => (animal.location.trim() ? `${animal.type} at ${animal.location.trim()}` : animal.type);
+
+// What needs attention because of the animals themselves, not their to-dos.
+function animalFlags(animal) {
+  if (animal.food !== 'bad') return [];
+  const needs = animal.foodNeeds.trim();
+  return [{ level: 'warn', text: needs ? `Needs ${needs}` : 'Food not good' }];
+}
+
 // Works out the card's badges as rows: red badges side by side (one per urgent to-do),
 // then one amber badge for food, or a green badge if neither applies.
 function animalAttention(animal) {
   const urgent = animal.todos.filter(todo => todo.priority === 'urgent' && !todo.done);
   const red = urgent.map(todo => todo.text.trim() || 'Urgent to-do');
+  const flags = animalFlags(animal);
 
   const rows = [];
   if (red.length) rows.push(red.map(text => ({ level: 'urgent', text })));
-  if (animal.food === 'bad') {
-    const needs = animal.foodNeeds.trim();
-    rows.push([{ level: 'warn', text: needs ? `Needs ${needs}` : 'Food not good' }]);
-  }
+  if (flags.length) rows.push(flags);
   return rows.length ? rows : [[{ level: 'good', text: 'All good' }]];
 }
 
@@ -67,8 +74,7 @@ function animalCard(animal) {
 
   const remove = el('button', { className: 'card-delete', type: 'button', textContent: 'Delete animals' });
   remove.addEventListener('click', () => {
-    const name = animal.location.trim() ? `${animal.type} at ${animal.location.trim()}` : animal.type;
-    if (!confirm(`Delete ${name} and everything on its card?`)) return;
+    if (!confirm(`Delete ${animalLabel(animal)} and everything on its card?`)) return;
     farm.animals.splice(farm.animals.indexOf(animal), 1);
     renderAnimals();
     scheduleSave();
@@ -89,12 +95,14 @@ function animalCard(animal) {
 
 // Cards sort by type, then location. Changing either only moves a card the next
 // time the page loads, so it can't jump mid-edit.
+const sortedAnimals = () => [...farm.animals].sort((a, b) => a.type.localeCompare(b.type)
+  || a.location.localeCompare(b.location, undefined, { numeric: true }));
+
 function renderAnimals(focusAnimal) {
-  const sorted = [...farm.animals].sort((a, b) => a.type.localeCompare(b.type)
-    || a.location.localeCompare(b.location, undefined, { numeric: true }));
   animalGrid.replaceChildren();
-  for (const animal of sorted) {
+  for (const animal of sortedAnimals()) {
     const card = animalCard(animal);
+    cardElements.set(animal, card);
     animalGrid.append(card);
     if (animal === focusAnimal) card.querySelector('.card-name').focus();
   }

@@ -30,7 +30,9 @@ function noteRow(note, onRemove) {
     onRemove(note);
   });
 
-  return el('li', { className: 'note' }, el('div', { className: 'note-row' }, text, updated, more, remove), details);
+  const row = el('li', { className: 'note' }, el('div', { className: 'note-row' }, text, updated, more, remove), details);
+  cardElements.set(note, row);
+  return row;
 }
 
 // Newest notes go first, and notes never move while being edited.

@@ -12,6 +12,8 @@ const addList = document.getElementById('add-list');
 const SAVE_DELAY = 500;
 const PRIORITIES = [['urgent', 'Urgent'], ['normal', 'Normal']];
 
+const cardElements = new WeakMap(); // from a field, animal, note or the farm to its element on the page
+
 let farm = null; // the page's working copy; edits change it directly, then get saved
 let saveTimer = null;
 let saving = false;
@@ -36,6 +38,7 @@ async function api(url, method = 'GET', body) {
 // ---------- Saving ----------
 // Waits for a pause in the edits, so typing doesn't send a save for every letter.
 function scheduleSave() {
+  renderWelcome(); // every edit comes through here, so this keeps the summary current
   unsaved = true;
   showStatus('Saving…');
   clearTimeout(saveTimer);
@@ -52,6 +55,7 @@ async function sendSave() {
   try {
     const saved = await api('/api/farm', 'PUT', farm);
     farm.lastUpdated = saved.lastUpdated;
+    showLastUpdated();
     if (!unsaved) showStatus('Saved');
   } catch (e) {
     unsaved = true;
@@ -187,6 +191,17 @@ function showTab(name) {
 for (const tab of tabs) tab.addEventListener('click', () => { location.hash = tab.dataset.tab; });
 window.addEventListener('hashchange', () => showTab(location.hash.slice(1)));
 
+// Opens a tab and points out one thing on it. The tab comes first: nothing can scroll to a hidden element.
+function jumpTo(tab, owner) {
+  location.hash = tab;
+  showTab(tab);
+  const target = cardElements.get(owner);
+  target.classList.remove('flash');
+  void target.offsetWidth; // makes the browser notice the class came off, so a second click flashes again
+  target.classList.add('flash');
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 // ---------- Add menu ----------
 const ADDERS = { field: addField, animals: addAnimal, todo: focusNewTodo, plan: focusNewPlan, note: focusNewNote };
 
@@ -259,6 +274,7 @@ api('/api/farm')
     renderAnimals();
     renderTodos();
     renderNotes();
+    renderWelcome();
     addButton.disabled = false;
   })
   .catch(e => showStatus(`Could not load the farm: ${e.message}`, true));
