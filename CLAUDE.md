@@ -35,7 +35,7 @@ Field Notes is the visible name only. The container, folders, repo and `package.
 ```js
 {
   mapName, lastUpdated, // ISO date, or null before the first save
-  fields:  [{ name, crop, growth, plow, lime, weed, fertilize, notes, todos, plans, updatedAt }],
+  fields:  [{ name, crop, growth, plow, lime, weed, fertilize, soilSample, notes, todos, plans, updatedAt }],
   animals: [{ type, location, food /* 'good' | 'bad' */, foodNeeds, notes, todos, plans, updatedAt }],
   todos:   [{ text, priority /* 'urgent' | 'normal' */, done }], // also the shape of a card's todos
   plans:   [{ text }],                                           // also the shape of a card's plans

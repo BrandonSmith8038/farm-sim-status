@@ -18,7 +18,7 @@ notebook paper.
   (urgent first), everything that needs attention, and notes. It's read-only, so click an item to jump
   to where it's edited. Hide collapses it, and it reopens every time the page loads.
 - **Fields tab:** a card per field with its crop, growth state, needs (plowing, lime, weeding,
-  fertilizer), notes, to-dos and future plans.
+  fertilizer, soil sampling), notes, to-dos and future plans.
 - **Animals tab:** a card per group of animals with its type, location, food status, notes, to-dos and
   future plans. When food is "Not good", a "What they need" box appears.
 - **To-Do & Plans tab:** general to-dos and future plans that don't belong to a card.

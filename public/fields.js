@@ -5,13 +5,13 @@ const CROPS = [
   'Soybeans', 'Spinach', 'Sugar Beet', 'Sugarcane', 'Sunflowers', 'Wheat',
 ];
 const GROWTH_STATES = ['Empty', 'Cultivated', 'Planted', 'Growing', 'Ready to harvest', 'Harvested', 'Withered'];
-const FIELD_NEEDS = [['plow', 'Plowing'], ['lime', 'Lime'], ['weed', 'Weeding'], ['fertilize', 'Fertilizer']];
+const FIELD_NEEDS = [['plow', 'Plowing'], ['lime', 'Lime'], ['weed', 'Weeding'], ['fertilize', 'Fertilizer'], ['soilSample', 'Soil Sampling']];
 
 const fieldGrid = document.getElementById('field-grid');
 const fieldsEmpty = document.getElementById('fields-empty');
 
 const newField = () => ({
-  name: '', crop: CROPS[0], growth: GROWTH_STATES[0], plow: false, lime: false, weed: false, fertilize: false,
+  name: '', crop: CROPS[0], growth: GROWTH_STATES[0], plow: false, lime: false, weed: false, fertilize: false, soilSample: false,
   notes: '', todos: [], plans: [], updatedAt: new Date().toISOString(),
 });
 
@@ -19,6 +19,7 @@ const newField = () => ({
 // simple need, and "someday" to-dos became future plans.
 function upgradeField(field) {
   field.fertilize = Boolean(field.fertilize);
+  field.soilSample = Boolean(field.soilSample);
   delete field.fertilizer;
   for (const todo of field.todos.filter(todo => todo.priority === 'someday')) {
     if (todo.done) {

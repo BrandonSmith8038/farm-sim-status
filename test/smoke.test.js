@@ -60,7 +60,7 @@ test('a save reaches farm.json and stamps the date', async () => {
 test('a field card and its lists are saved as sent', async () => {
   const farm = await (await fetch(base + '/api/farm')).json();
   const field = {
-    name: 'Field 7', crop: 'Wheat', growth: 'Growing', plow: false, lime: true, weed: false, fertilize: true, notes: 'Sloped',
+    name: 'Field 7', crop: 'Wheat', growth: 'Growing', plow: false, lime: true, weed: false, fertilize: true, soilSample: true, notes: 'Sloped',
     todos: [{ text: 'Spray', priority: 'urgent', done: false }], plans: [{ text: 'Try canola' }], updatedAt: '2026-11-03T00:00:00.000Z',
   };
   assert.strictEqual((await send('/api/farm', 'PUT', { ...farm, fields: [field] })).status, 200);
