@@ -1,4 +1,4 @@
-# Farm Sim Status
+# Field Notes
 
 A status board and reminder notebook for Farming Simulator 25. Update it at the end of a session,
 and when you come back weeks or months later it reminds you where you left off.
@@ -42,6 +42,11 @@ docker compose up -d --build
 Then open `http://<Server IP>:8210`.
 
 To use a different port, change `PORT` in `.env` and rebuild.
+
+The app is called Field Notes on the page, but the container and folders are named `farm-sim-status`.
+
+The Unraid Docker tab icon comes from the `net.unraid.docker.icon` label in `docker-compose.yml`, which
+contains the server's IP address. If the IP changes, update the label and rebuild.
 
 ## Update
 ```sh

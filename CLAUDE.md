@@ -1,7 +1,10 @@
-# Farm Sim Status
+# Field Notes
 
 Status board and reminder notebook for Farming Simulator 25. See [README.md](README.md) for what it
 does and how to install, update and back it up.
+
+Field Notes is the visible name only. The container, folders, repo and `package.json` are still
+`farm-sim-status`, so existing data and setup keep working.
 
 ## Stack and layout
 - No build step. Express backend, plain HTML/CSS/JS frontend.
@@ -14,6 +17,8 @@ does and how to install, update and back it up.
   - `welcome.js`: Welcome back panel.
   - `style.css`: all styling. `wood.svg` and `cork.svg` are generated textures, not photos, and `fonts/`
     holds the self-hosted fonts.
+  - `logo.png` (header) and `icon.png` (Docker tab) are Brandon's own logos, only scaled. Don't recolour or
+    redraw them. `favicon.svg` is a simplified F and leaf, redrawn at his request so it reads at tab size.
 - `docs/screenshot.jpg`: README screenshot, taken with sample data, not the real farm.
 - `test/smoke.test.js`: API and storage tests. Nothing tests the frontend behaviour.
 

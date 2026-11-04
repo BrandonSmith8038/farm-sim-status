@@ -61,8 +61,17 @@ button, input, select, textarea { color: inherit; font: inherit; }
   color: #fff8e6;
 }
 
-.title { display: flex; align-items: baseline; gap: 20px; min-width: 0; }
-.app-name { color: #ffe9b8; font-size: 22px; white-space: nowrap; }
+.title { display: flex; align-items: center; gap: 20px; min-width: 0; }
+/* Hangs over the bottom of the sign. The negative margins keep the header at its normal height. */
+.app-logo {
+  position: relative;
+  z-index: 5;
+  flex-shrink: 0;
+  display: block;
+  width: auto;
+  height: 100px;
+  margin: -12px 0 -42px;
+}
 
 .map-view { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .map-view[hidden] { display: none; }

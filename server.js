@@ -63,6 +63,6 @@ app.use((err, req, res, next) => {
   res.status(status).json({ error: status === 400 ? 'That is not valid JSON.' : err.message });
 });
 
-if (require.main === module) app.listen(PORT, () => console.log(`Farm Sim Status listening on port ${PORT}`));
+if (require.main === module) app.listen(PORT, () => console.log(`Field Notes listening on port ${PORT}`));
 
 module.exports = app;

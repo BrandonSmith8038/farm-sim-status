@@ -31,7 +31,7 @@ test.after(() => {
 test('serves the page shell', async () => {
   const res = await fetch(base + '/');
   assert.strictEqual(res.status, 200);
-  assert.match(await res.text(), /Farm Sim Status/);
+  assert.match(await res.text(), /Field Notes/);
 });
 
 test('serves the welcome back panel and its script', async () => {

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Browser tab icon: a simplified F and leaf, redrawn from the stacked logo so it reads at 16px. -->
+  <g stroke-linejoin="round">
+    <!-- The F, drawn three times: dark edge, then white, then gold band with green fill -->
+    <path id="f" d="M14 22H52V32H27V38H46V47H27V60H14Z" fill="#1e871d" stroke="#0b3d0c" stroke-width="7"/>
+    <path d="M14 22H52V32H27V38H46V47H27V60H14Z" fill="#1e871d" stroke="#fff" stroke-width="4.5"/>
+    <path d="M14 22H52V32H27V38H46V47H27V60H14Z" fill="#1e871d" stroke="#fdc701" stroke-width="2.5"/>
+  </g>
+  <!-- The sprout: stem and two gold leaves -->
+  <g fill="#fdc701" stroke="#0b3d0c" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M32 19C22 19 15 13 14 2C25 2 32 8 32 19Z"/>
+    <path d="M32 19C42 19 49 13 50 2C39 2 32 8 32 19Z"/>
+  </g>
+</svg>
